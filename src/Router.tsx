@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Personagens } from './pages/Personagens';
+import { Characters } from './pages/Characters/Characters';
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Personagens />} />
+        <Route path="/" element={<Characters />} />
       </Routes>
     </BrowserRouter>
   );

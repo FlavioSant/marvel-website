@@ -33,7 +33,7 @@ export const Header = () => {
             <li>
               <a
                 href=""
-                className="block py-2 pl-3 pr-4 rounded-md font-medium text-neutral-300 hover:text-neutral-50 lg:p-3"
+                className="block py-2 pl-3 pr-4 rounded-md font-medium text-sm text-neutral-300 uppercase hover:text-neutral-50 lg:p-3"
               >
                 Personagens
               </a>

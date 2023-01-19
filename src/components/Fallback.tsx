@@ -1,6 +1,5 @@
-import { LoadingSpinner } from './LoadingSpinner';
-
 import { FallbackError } from './FallbackError';
+import { Loading } from './Loading';
 
 interface FallbackProps {
   isLoading: boolean;
@@ -9,12 +8,7 @@ interface FallbackProps {
 
 export const Fallback = ({ error, isLoading }: FallbackProps) => {
   if (isLoading) {
-    return (
-      <div className="container mx-auto flex flex-col items-center p-4">
-        <LoadingSpinner />
-        <p className="text-base text-neutral-800 font-medium">Carregando...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return <FallbackError error={error} />;
