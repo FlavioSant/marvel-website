@@ -22,7 +22,7 @@ export const GetMoreButton = ({
           onClick={onClick}
           disabled={disabled}
           className={classNames(
-            'block mx-auto mt-10 relative bg-red-500 disabled:bg-red-400 disabled:cursor-not-allowed before:h-4 before:ml-4 before:bg-red-500 before:border-red-500 before:border-solid before:border-t-0 before:border-r-0 before:border-b-[16px] before:border-l-[16px] before:block after:content-[""] after:block after:h-4 after:mr-4 after:bg-red-500 after:border-solid after:border-red-500 after:border-t-[16px] after:border-r-[16px] after:border-b-0 after:border-l-0',
+            'block mx-auto mt-20 relative bg-red-500 disabled:bg-red-400 disabled:cursor-not-allowed before:h-4 before:ml-4 before:bg-red-500 before:border-red-500 before:border-solid before:border-t-0 before:border-r-0 before:border-b-[16px] before:border-l-[16px] before:block after:content-[""] after:block after:h-4 after:mr-4 after:bg-red-500 after:border-solid after:border-red-500 after:border-t-[16px] after:border-r-[16px] after:border-b-0 after:border-l-0',
             disabled ? 'before:border-[#f87171] after:border-[#f87171]' : '',
           )}
           {...rest}

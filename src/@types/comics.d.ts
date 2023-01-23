@@ -1,6 +1,7 @@
 interface Comic {
   id: number;
   title: string;
+  description: string;
   characters: {
     available: number;
     returned: number;
@@ -13,7 +14,7 @@ interface Comic {
       name: string;
       role: string;
     }[];
-  }[];
+  };
   format: string;
   thumbnail: {
     path: string;

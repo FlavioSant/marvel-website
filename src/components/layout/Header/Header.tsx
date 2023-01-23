@@ -39,6 +39,14 @@ export const Header = () => {
                 Personagens
               </Link>
             </li>
+            <li>
+              <Link
+                to="/comics"
+                className="block py-2 pl-3 pr-4 rounded-md font-medium text-sm text-neutral-300 uppercase hover:text-neutral-50 lg:p-3"
+              >
+                Quadrinhos
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

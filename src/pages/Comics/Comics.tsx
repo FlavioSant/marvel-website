@@ -1,25 +1,23 @@
 import { useEffect, useState } from 'react';
-import { DefaultLayout } from '../../components/layout/DefaultLayout';
-
 import { fetchAPI } from '../../functions/fetchAPI';
-import { useHandler } from '../../hooks/useHandler';
 import { useFilterParams } from '../../hooks/useFilterParams';
+import { useHandler } from '../../hooks/useHandler';
 
+import bannerComics from '../../assets/banner-comics.jpg';
+import { DefaultLayout } from '../../components/layout/DefaultLayout';
 import { Loading } from '../../components/Loading';
 import { Select } from '../../components/forms/Select';
-import { CharacterList } from '../../components/CharacterList';
+import { ComicList } from '../../components/ComicList';
 import { GetMoreButton } from '../../components/GetMoreButton';
 
-import banner from '../../assets/marvel-banner.jpg';
-
-export const Characters = () => {
+export const Comics = () => {
   const { handler } = useHandler();
   const [isLoadingInitialData, setIsLoadingInitialData] = useState(true);
-  const [isLoadingMoreCharacters, setIsLoadingMoreCharacters] = useState(false);
+  const [isLoadingMoreComics, setIsLoadingMoreComics] = useState(false);
   const [orderBy, setOrderBy] = useState('');
   const [pagination, setPagination] = useState({ page: 1, perPage: 50 });
 
-  const [requestData, setRequestData] = useState<RequestData<Character> | null>(
+  const [requestData, setRequestData] = useState<RequestData<Comic> | null>(
     null,
   );
 
@@ -29,12 +27,12 @@ export const Characters = () => {
     setIsLoadingInitialData(true);
 
     try {
-      const { data } = await fetchAPI<RequestData<Character>>(
-        `/characters?limit=50&offset=0`,
+      const { data } = await fetchAPI<RequestData<Comic>>(
+        `/comics?limit=50&offset=0&orderBy=title`,
       );
 
       if (!data) {
-        throw new Error('Failed to get characters.');
+        throw new Error('Failed to get comics.');
       }
 
       setRequestData(data);
@@ -43,16 +41,16 @@ export const Characters = () => {
     }
   });
 
-  const fetchMoreCharacters = handler(async () => {
-    setIsLoadingMoreCharacters(true);
+  const fetchMoreComics = handler(async () => {
+    setIsLoadingMoreComics(true);
 
     try {
-      const { data } = await fetchAPI<RequestData<Character>>(
-        `/characters?${searchParams.toString()}`,
+      const { data } = await fetchAPI<RequestData<Comic>>(
+        `/comics?${searchParams.toString()}`,
       );
 
       if (!data) {
-        throw new Error('Failed to get more characters.');
+        throw new Error('Failed to get more comics.');
       }
 
       const newResults = data.data.results;
@@ -69,20 +67,20 @@ export const Characters = () => {
           : null,
       );
     } finally {
-      setIsLoadingMoreCharacters(false);
+      setIsLoadingMoreComics(false);
     }
   });
 
-  const fetchCharactersByOrder = handler(async () => {
+  const fetchComicsByOrder = handler(async () => {
     setIsLoadingInitialData(true);
 
     try {
-      const { data } = await fetchAPI<RequestData<Character>>(
-        `/characters?${searchParams.toString()}`,
+      const { data } = await fetchAPI<RequestData<Comic>>(
+        `/comics?${searchParams.toString()}`,
       );
 
       if (!data) {
-        throw new Error('Failed to get characters.');
+        throw new Error('Failed to get comics.');
       }
 
       setRequestData(data);
@@ -97,13 +95,13 @@ export const Characters = () => {
 
   useEffect(() => {
     if (pagination.page > 1) {
-      fetchMoreCharacters();
+      fetchMoreComics();
     }
   }, [pagination.page, pagination.perPage]);
 
   useEffect(() => {
     if (orderBy) {
-      fetchCharactersByOrder();
+      fetchComicsByOrder();
     }
   }, [orderBy]);
 
@@ -113,29 +111,28 @@ export const Characters = () => {
     <DefaultLayout attributionHTML={requestData?.attributionHTML}>
       <section id="hero" className="relative">
         <img
-          src={banner}
+          src={bannerComics}
           alt="Banner"
           className="w-full h-[400px] object-cover"
         />
         <div className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-full bg-black/75">
           <h1 className="font-semibold text-4xl sm:text-6xl text-neutral-200 uppercase">
-            Personagens
+            Quadrinhos
           </h1>
           <p className="font-medium text-center text-lg text-neutral-200 mt-4">
-            Conheça os personagens do poderoso universo cinematográfico da
-            Marvel.
+            Conheça os quadrinhos do poderoso universo Marvel.
           </p>
         </div>
       </section>
 
       <section
-        id="personagens"
+        id="quadrinhos"
         className="bg-neutral-100 min-h-[calc(100vh_-_120px)]"
       >
         <div className="container mx-auto py-20 px-4 md:px-0">
           <div className="flex flex-col sm:flex-row sm:items-end gap-4 justify-between">
             <h2 className="font-medium text-2xl text-neutral-800">
-              Lista de personagens:
+              Lista de quadrinhos:
             </h2>
 
             <Select
@@ -145,10 +142,10 @@ export const Characters = () => {
               value={orderBy}
               onChange={value => setOrderBy(value)}
               options={[
-                { label: 'Nome ascendente', value: 'name' },
-                { label: 'Nome descendente', value: '-name' },
-                { label: 'Modificação ascendente', value: 'modified' },
-                { label: 'Modificação descendente', value: '-modified' },
+                { label: 'Título de A-Z', value: 'title' },
+                { label: 'Título de Z-A', value: '-title' },
+                { label: 'Data de venda', value: 'onsaleDate' },
+                { label: 'Número de emissão', value: 'issueNumber' },
               ]}
             />
           </div>
@@ -160,19 +157,22 @@ export const Characters = () => {
           ) : (
             <>
               {requestData && requestData.data.results.length > 0 ? (
-                <CharacterList characters={requestData.data.results} />
+                <ComicList comics={requestData.data.results} />
               ) : (
                 <p className="flex justify-center font-medium text-base text-neutral-800">
-                  Nenhum personangem encontrado.
+                  Nenhum quadrinho encontrado.
                 </p>
               )}
 
               <GetMoreButton
                 type="button"
-                isLoading={isLoadingMoreCharacters}
+                isLoading={isLoadingMoreComics}
                 disabled={requestData?.data.results.length === totalCount}
                 onClick={() =>
-                  setPagination({ ...pagination, page: pagination.page + 1 })
+                  setPagination({
+                    ...pagination,
+                    page: pagination.page + 1,
+                  })
                 }
               >
                 Carregar mais

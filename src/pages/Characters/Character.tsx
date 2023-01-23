@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '../../hooks/useQuery';
-import { ComicList } from './components/ComicList';
-import { SerieList } from './components/SerieList';
+import { ComicList } from '../../components/ComicList';
+import { SerieList } from '../../components/SerieList';
 import { Fallback } from '../../components/Fallback';
 import { DefaultLayout } from '../../components/layout/DefaultLayout';
 
@@ -26,10 +26,7 @@ export const Character = () => {
 
   return (
     <DefaultLayout attributionHTML={queryCharacter.data?.attributionHTML}>
-      <section
-        id="personagem"
-        className="bg-neutral-100 min-h-[calc(100vh_-_120px)]"
-      >
+      <div className="bg-neutral-100 min-h-[calc(100vh_-_120px)]">
         {queryCharacter.fallback ? (
           <Fallback
             error={queryCharacter.error}
@@ -85,6 +82,15 @@ export const Character = () => {
                             Nenhum quadrinho encontrado.
                           </p>
                         )}
+
+                        <Link
+                          to={`/characters/${params.id}/comics`}
+                          className='block w-max mx-auto mt-10 relative bg-red-500 disabled:bg-red-400 disabled:cursor-not-allowed before:h-4 before:ml-4 before:bg-red-500 before:border-red-500 before:border-solid before:border-t-0 before:border-r-0 before:border-b-[16px] before:border-l-[16px] before:block after:content-[""] after:block after:h-4 after:mr-4 after:bg-red-500 after:border-solid after:border-red-500 after:border-t-[16px] after:border-r-[16px] after:border-b-0 after:border-l-0'
+                        >
+                          <span className="block px-9 text-neutral-50 font-medium uppercase text-sm text-center before:content-[''] before:border-t-0 before:border-r-0 before:border-b-[16px] before:border-l-[16px] before:border-solid before:border-[#e62429_#f5f5f5] before:block before:absolute before:left-0 before:top-0 after:content-[''] after:block after:absolute after:bottom-0 after:right-0 after:border-solid after:border-[#e62429_#f5f5f5] after:border-t-[16px] after:border-r-[16px] after:border-b-0 after:border-l-0 after:transform-[rotate(180deg)]">
+                            Ver quadrinhos do {character.name}
+                          </span>
+                        </Link>
                       </>
                     )}
                   </div>
@@ -122,7 +128,7 @@ export const Character = () => {
             )}
           </>
         )}
-      </section>
+      </div>
     </DefaultLayout>
   );
 };
