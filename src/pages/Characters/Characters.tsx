@@ -8,7 +8,7 @@ import { useFilterParams } from '../../hooks/useFilterParams';
 import { Loading } from '../../components/Loading';
 import { Select } from '../../components/forms/Select';
 import { CharacterList } from './components/CharacterList';
-import { GetMoreCharactersButton } from './components/GetMoreCharactersButton';
+import { GetMoreButton } from '../../components/GetMoreButton';
 
 import banner from '../../assets/marvel-banner.jpg';
 
@@ -128,8 +128,11 @@ export const Characters = () => {
         </div>
       </section>
 
-      <section id="personagens" className="bg-neutral-100">
-        <div className="container mx-auto py-20 px-4">
+      <section
+        id="personagens"
+        className="bg-neutral-100 min-h-[calc(100vh_-_120px)]"
+      >
+        <div className="container mx-auto py-20 px-4 md:px-0">
           {isLoadingInitialData ? (
             <Loading />
           ) : (
@@ -164,7 +167,7 @@ export const Characters = () => {
                 </p>
               )}
 
-              <GetMoreCharactersButton
+              <GetMoreButton
                 isLoading={isLoadingMoreCharacters}
                 disabled={requestData?.data.results.length === totalCount}
                 onClick={() =>

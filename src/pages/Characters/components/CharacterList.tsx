@@ -1,14 +1,19 @@
+import { useNavigate } from 'react-router-dom';
+
 interface CharacterListProps {
   characters: Character[];
 }
 
 export const CharacterList = ({ characters }: CharacterListProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-6">
       {characters.map((character, index) => (
         <div
           key={`character-${character.id}-${index}`}
-          className="bg-neutral-900"
+          onClick={() => navigate(`/characters/${character.id}`)}
+          className="bg-neutral-900 cursor-pointer transform transition duration-200 hover:scale-105"
         >
           <figure className="h-[170px] lg:h-[210px]">
             <img

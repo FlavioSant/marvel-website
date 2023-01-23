@@ -1,18 +1,17 @@
 import classNames from 'classnames';
 import { ButtonHTMLAttributes } from 'react';
-import { Loading } from '../../../components/Loading';
+import { Loading } from './Loading';
 
-interface GetMoreCharactersButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface GetMoreButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading: boolean;
 }
 
-export const GetMoreCharactersButton = ({
+export const GetMoreButton = ({
   onClick,
   isLoading,
   disabled,
   ...rest
-}: GetMoreCharactersButtonProps) => {
+}: GetMoreButtonProps) => {
   return (
     <>
       {isLoading ? (
