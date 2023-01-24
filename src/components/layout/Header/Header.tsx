@@ -26,7 +26,7 @@ export const Header = () => {
 
         <nav
           className={classNames(
-            'w-full rounded-lg mt-4 bg-neutral-900 lg:bg-transparent lg:m-0',
+            'w-full rounded-lg mt-4 bg-neutral-900 lg:bg-transparent lg:m-0 lg:mr-14',
             isMenuMobileOpen ? 'flex' : 'hidden lg:block',
           )}
         >
