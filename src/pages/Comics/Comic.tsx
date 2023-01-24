@@ -44,27 +44,29 @@ export const Comic = () => {
 
                         <div className="h-1 w-8 mx-auto my-4 bg-red-500 border-0" />
 
-                        <p className="font-medium text-lg text-neutral-50 text-center mx-auto max-w-[800px]">
-                          Criadores:
-                        </p>
-
                         {comic.creators && (
-                          <div className="flex flex-wrap gap-4 mx-auto mt-4">
-                            {comic.creators.items.map(creator => (
-                              <div
-                                key={`creator-${creator.name}`}
-                                className="py-1 px-3 rounded bg-neutral-600 w-max"
-                              >
-                                <p className="font-medium text-sm text-neutral-100">
-                                  {creator.name}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                          <>
+                            <p className="font-medium text-lg text-neutral-50 text-center mx-auto max-w-[800px]">
+                              Criadores:
+                            </p>
+
+                            <div className="flex flex-wrap justify-center gap-4 mx-auto mt-4 max-w-[800px]">
+                              {comic.creators.items.map(creator => (
+                                <div
+                                  key={`creator-${creator.name}`}
+                                  className="py-1 px-3 rounded bg-neutral-600 w-max"
+                                >
+                                  <p className="font-medium text-sm text-neutral-100">
+                                    {creator.name}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </>
                         )}
 
                         <p className="font-base text-lg text-neutral-200 text-center mt-10 mx-auto max-w-[800px]">
-                          {comic.description}
+                          {comic.description.replace(/<[^>]*>/g, '')}
                         </p>
                       </div>
                     </div>
