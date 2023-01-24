@@ -11,6 +11,7 @@ interface Comic {
     available: number;
     returned: number;
     items: {
+      resourceURI: string;
       name: string;
       role: string;
     }[];

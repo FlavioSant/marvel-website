@@ -16,8 +16,8 @@ export const FallbackError = ({ error }: FallbackErrorProps) => {
 
   return (
     <div className="container flex flex-col items-center justify-center gap-4 p-4 mx-auto">
-      <h3 className="font-semibold text-4xl text-neutral-100">Ooops...</h3>
-      <p className="font-medium text-base text-neutral-200">
+      <h3 className="font-semibold text-4xl text-neutral-800">Ooops...</h3>
+      <p className="font-medium text-base text-neutral-700">
         A página que você procura encontrou um erro.
       </p>
 

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CharacterList } from '../../components/CharacterList';
 import { Fallback } from '../../components/Fallback';
 import { DefaultLayout } from '../../components/layout/DefaultLayout';
@@ -16,6 +16,8 @@ export const Comic = () => {
   const comicCharacters = queryComicCharacters.fallback
     ? null
     : queryComicCharacters.data.data.results;
+
+  console.log({ comic });
 
   return (
     <DefaultLayout attributionHTML={queryComic.data?.attributionHTML}>
@@ -52,21 +54,23 @@ export const Comic = () => {
 
                             <div className="flex flex-wrap justify-center gap-4 mx-auto mt-4 max-w-[800px]">
                               {comic.creators.items.map(creator => (
-                                <div
+                                <Link
                                   key={`creator-${creator.name}`}
-                                  className="py-1 px-3 rounded bg-neutral-600 w-max"
+                                  to={`/creators/${creator.resourceURI.substring(
+                                    creator.resourceURI.indexOf('creators/') +
+                                      9,
+                                  )}`}
+                                  className="font-medium text-sm text-neutral-100 py-1 px-3 rounded bg-neutral-600 w-max transition-colors hover:bg-amber-500 hover:text-neutral-800"
                                 >
-                                  <p className="font-medium text-sm text-neutral-100">
-                                    {creator.name}
-                                  </p>
-                                </div>
+                                  {creator.name}
+                                </Link>
                               ))}
                             </div>
                           </>
                         )}
 
                         <p className="font-base text-lg text-neutral-200 text-center mt-10 mx-auto max-w-[800px]">
-                          {comic.description.replace(/<[^>]*>/g, '')}
+                          {comic.description?.replace(/<[^>]*>/g, '')}
                         </p>
                       </div>
                     </div>
