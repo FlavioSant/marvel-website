@@ -132,7 +132,7 @@ export const Characters = () => {
         id="personagens"
         className="bg-neutral-100 min-h-[calc(100vh_-_120px)]"
       >
-        <div className="container mx-auto py-20 px-4 lg:px-0">
+        <div className="container mx-auto py-20 px-4 xl:px-0">
           <div className="flex flex-col sm:flex-row sm:items-end gap-4 justify-between">
             <h2 className="font-medium text-2xl text-neutral-800">
               Lista de personagens:
@@ -141,7 +141,7 @@ export const Characters = () => {
             <Select
               name="orderBy"
               label="Ordenar por"
-              className="w-64"
+              className="md:w-64"
               value={orderBy}
               onChange={value => setOrderBy(value)}
               options={[

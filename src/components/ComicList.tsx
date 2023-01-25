@@ -15,7 +15,7 @@ export const ComicList = ({ comics }: ComicListProps) => {
         >
           <img
             alt={comic.title}
-            className="w-full h-auto min-h-[430px] max-h-[430px] shadow-xl object-contain"
+            className="w-full h-auto min-h-[209px] md:min-h-[264px] md:max-h-[264px] lg:min-h-[360px] lg:max-h-[360px] xl:min-h-[430px] xl:max-h-[430px] shadow-xl object-contain"
             src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
           />
 

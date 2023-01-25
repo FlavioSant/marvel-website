@@ -17,8 +17,6 @@ export const Comic = () => {
     ? null
     : queryComicCharacters.data.data.results;
 
-  console.log({ comic });
-
   return (
     <DefaultLayout attributionHTML={queryComic.data?.attributionHTML}>
       <div className="bg-neutral-100 min-h-[calc(100vh_-_120px)]">
@@ -40,7 +38,7 @@ export const Comic = () => {
                       </figure>
 
                       <div className="flex flex-col w-full">
-                        <h1 className="font-semibold text-4xl mx-auto text-neutral-50 uppercase">
+                        <h1 className="font-semibold text-4xl text-center mx-auto text-neutral-50 uppercase">
                           {comic.title}
                         </h1>
 
